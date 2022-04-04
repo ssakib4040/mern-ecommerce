@@ -2,8 +2,16 @@ import React from "react";
 import "./Navbar.css";
 
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ click }) => {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+  };
+
   return (
     <nav className="navbar">
       {/* logo  */}
@@ -17,7 +25,7 @@ const Navbar = ({ click }) => {
             <i className="fas fa-shopping-cart"></i>
             <span>
               Cart
-              <span className="navbar__cart_badge">0</span>
+              <span className="navbar__cart_badge">{getCartCount()}</span>
             </span>
           </Link>
         </li>
