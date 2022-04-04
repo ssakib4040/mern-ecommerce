@@ -8,7 +8,8 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "data:import": "node backend/seederScript.js"
+    "data:import": "node backend/seederScript.js",
+    "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
