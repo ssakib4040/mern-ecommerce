@@ -10,6 +10,19 @@ connectDB();
 app.use(express.json());
 app.use(morgan("dev"));
 
+// heroku
+if (process.env.NODE_ENV == "production") {
+  const path = require("path");
+
+  app.use(express.static(path.join(__dirname, "../", "frontend", "build")));
+
+  app.get("/*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    );
+  });
+}
+
 app.get("/", (req, res) => {
   res.send("Api working");
 });
